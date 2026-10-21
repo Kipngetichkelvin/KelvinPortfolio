@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Kelvin Kipngetich Kiplangat — Portfolio
+   responsive.css
+   --------------------------------------------------------------------------
+   Layout, breakpoints and navigation behaviour ONLY.
+
+   css/style.css holds the design tokens, typography and component skins and
+   is written mobile-first (single column). This file adds columns as the
+   viewport grows and defines the mobile navigation drawer.
+
+   Breakpoints
+     0    – 599   small phones      (base styles in style.css + this file)
+     600  – 759   large phones      (small type / spacing lift)
+     760  – 979   tablets           (2-column card grids)
+     980  – 1099  small laptops     (2-column page layouts)
+     1100 – up    desktops          (full 3-column grids, roomier spacing)
+
+   Notes
+     • The hamburger (.nav-toggle) is `display:inline-flex` in style.css, so
+       it only needs to be hidden from the desktop breakpoint upwards.
+     • .primary-nav has no rules in style.css; the drawer is defined here.
+     • .field--honeypot and .to-top[hidden] are intentionally left untouched.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Mobile navigation drawer (base = small screens)
+   ========================================================================== */
+
+.primary-nav {
+  display: none;
+}
+
+.primary-nav.is-open {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: block;
+  padding: 0.6rem var(--gutter) 1rem;
+  background-color: rgba(9, 14, 21, 0.98);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 24px 40px -30px #000;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* The drawer hangs off the sticky header, so the header must be the
+   positioning context. */
+.site-header {
+  position: sticky;
+}
+
+.primary-nav .nav-list {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+}
+
+.primary-nav .nav-link {
+  display: block;
+  padding: 0.85rem 0.25rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  font-size: 0.98rem;
+}
+
+.primary-nav .nav-list > li:last-child .nav-link {
+  border-bottom: 0;
+}
+
+/* The gradient underline is a desktop nicety; inside the drawer the
+   full-width row is the hover/focus affordance. */
+.primary-nav .nav-link::after {
+  display: none;
+}
+
+.primary-nav .nav-link:hover,
+.primary-nav .nav-link:focus-visible,
+.primary-nav .nav-link.is-active {
+  color: var(--text);
+}
+
+.primary-nav .nav-link.is-active {
+  color: var(--accent);
+}
+
+/* Slightly tighter header on small phones so the brand + toggle always fit. */
+@media (max-width: 479px) {
+  .brand-role {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ==========================================================================
+   2. Small spacing lift (600px+)
+   ========================================================================== */
+
+@media (min-width: 600px) {
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  .hero-meta {
+    gap: 1.15rem 1.75rem;
+  }
+
+  .focus-strip {
+    justify-content: center;
+  }
+
+  .contact-form-wrap {
+    padding: 2rem 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   3. Tablets (760px+)
+   ========================================================================== */
+
+@media (min-width: 760px) {
+  .section {
+    padding-block: 5.25rem;
+  }
+
+  .about-grid {
+    gap: 2.5rem;
+  }
+
+  /* Two skill cards per row; the growth card spans the full width so it
+     does not sit alone in an awkward half row. */
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-card--growth {
+    grid-column: 1 / -1;
+  }
+
+  .project-grid {
+    gap: 1.75rem;
+  }
+
+  .opportunity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .footer-bottom {
+    margin-top: 2.5rem;
+  }
+
+  .timeline {
+    padding-left: 2.25rem;
+  }
+
+  .timeline-dot {
+    left: -2.25rem;
+  }
+
+  .timeline-card {
+    padding: 1.85rem;
+  }
+}
+
+/* ==========================================================================
+   4. Desktop navigation (900px+)
+   ========================================================================== */
+
+@media (min-width: 900px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  /* Tear down every drawer rule and return to an inline nav. */
+  .primary-nav,
+  .primary-nav.is-open {
+    position: static;
+    display: block;
+    padding: 0;
+    background-color: transparent;
+    border-bottom: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .primary-nav .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .primary-nav .nav-link {
+    display: inline-block;
+    padding: 0.5rem 0.15rem;
+    border-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  .primary-nav .nav-link::after {
+    display: block;
+  }
+
+  .primary-nav .nav-link.is-active {
+    color: var(--text);
+  }
+
+  .brand-role {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   5. Two-column page layouts (980px+)
+   ========================================================================== */
+
+@media (min-width: 980px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3.5rem;
+  }
+
+  .hero-visual {
+    justify-content: flex-end;
+  }
+
+  .about-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+    gap: 3rem;
+  }
+
+  .facts-card {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .contact-grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 2.75rem;
+    align-items: start;
+  }
+
+  .contact-form-wrap {
+    padding: 2.25rem 2rem;
+  }
+}
+
+/* ==========================================================================
+   6. Wide desktops (1100px+)
+   ========================================================================== */
+
+@media (min-width: 1100px) {
+  .section {
+    padding-block: 6rem;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skill-card--growth {
+    grid-column: auto;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .opportunity-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .timeline-card {
+    padding: 2rem;
+  }
+}
+
+/* ==========================================================================
+   7. Very small phones (max 420px)
+   ========================================================================== */
+
+@media (max-width: 420px) {
+  .hero-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-actions {
+    gap: 0.65rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .avatar {
+    width: 124px;
+    height: 124px;
+    font-size: 2rem;
+  }
+
+  .contact-form-wrap {
+    padding: 1.35rem 1.1rem;
+  }
+
+  .timeline {
+    padding-left: 1.35rem;
+  }
+
+  .timeline-dot {
+    left: -1.35rem;
+  }
+
+  .badge-row,
+  .tag-row,
+  .focus-strip {
+    gap: 0.4rem 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   8. Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-nav.is-open {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   9. Print
+   ========================================================================== */
+
+@media print {
+  .site-header,
+  .nav-toggle,
+  .primary-nav,
+  .hero-glow,
+  .focus-strip,
+  .contact-form-wrap,
+  .to-top,
+  .skip-link {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .section,
+  .section--alt {
+    padding-block: 1rem;
+    background: none;
+  }
+
+  .project-card,
+  .skill-card,
+  .timeline-card,
+  .opportunity-card,
+  .facts-card,
+  .contact-info {
+    border: 1px solid #ccc;
+    background: none;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .hero-grid,
+  .about-grid,
+  .contact-grid,
+  .skill-grid,
+  .project-grid,
+  .opportunity-grid,
+  .footer-grid {
+    display: block;
+  }
+
+  .project-card + .project-card,
+  .opportunity-card + .opportunity-card,
+  .timeline-item + .timeline-item {
+    margin-top: 1rem;
+  }
+
+  a {
+    color: #000;
+  }
+}
