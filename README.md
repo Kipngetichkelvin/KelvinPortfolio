@@ -1,27 +1,16 @@
-# Kelvin Kipngetich Kiplangat — Personal Portfolio
+# Kelvin Kipngetich Kiplangat — Developer Portfolio
 
-A static, responsive personal portfolio website for **Kelvin Kipngetich Kiplangat**, a Computer Science
-student at the University of Embu, Kenya. The site presents an introduction, technical skills, two
-academic/personal projects, education, the kinds of opportunities being sought, and a validated contact
-form.
+A fast, responsive, single-page portfolio for **Kelvin Kipngetich Kiplangat**, a software
+developer and web developer based in Kenya. The site presents his practical work, technical
+skills and contact details in a clean, accessible, dark-themed interface.
 
-Built with **HTML5, CSS3 and vanilla JavaScript** only — no frameworks, no build step, no dependencies.
+Built with plain **HTML5, CSS3 and vanilla JavaScript** — no frameworks, no build step, no
+dependencies. It runs from a static file host and is ready for GitHub Pages.
 
----
-
-## Table of contents
-
-1. [Overview](#overview)
-2. [Features](#features)
-3. [File structure](#file-structure)
-4. [Running the site locally](#running-the-site-locally)
-5. [Configuration](#configuration)
-6. [How the contact form behaves](#how-the-contact-form-behaves)
-7. [Replacing placeholder media](#replacing-placeholder-media)
-8. [Adding a third project](#adding-a-third-project)
-9. [Honesty notes / current limitations](#honesty-notes--current-limitations)
-10. [Deployment (GitHub Pages)](#deployment-github-pages)
-11. [Testing summary](#testing-summary)
+- **Live URL (GitHub Pages):** <https://kipngetichkelvin.github.io/KelvinPortfolio/>
+- **GitHub profile:** <https://github.com/Kipngetichkelvin>
+- **Email:** <mailto:kelvinkipngetich052@gmail.com>
+- **Phone:** <tel:+254725970882> (+254 725 970 882)
 
 ---
 
@@ -30,47 +19,28 @@ Built with **HTML5, CSS3 and vanilla JavaScript** only — no frameworks, no bui
 | Item | Detail |
 | --- | --- |
 | Owner | Kelvin Kipngetich Kiplangat |
-| Course | BSc Computer Science, University of Embu (expected graduation 2027) |
-| Purpose | Portfolio for industrial attachment, internships, job shadowing and entry-level / remote tech roles |
-| Type | Single-page static site with anchor navigation |
-| Tech | HTML5, CSS3, vanilla JavaScript |
-| Backend | None — see [Configuration](#configuration) |
-| Hosting target | Any static host, including GitHub Pages |
-
-Sections in page order:
-
-1. **Home** (hero)
-2. **About Me**
-3. **Technical Skills**
-4. **Featured Projects**
-5. **Education**
-6. **Career Opportunities** (`#opportunities` — deliberately absent from the nav bar to keep the nav
-   focused on the six main sections)
-7. **Contact**
-8. **Footer**
+| Headline | Software Developer \| Web Developer \| Technology Enthusiast |
+| Hero headline | Building Practical Digital Solutions Through Code. |
+| Type | Single-page static portfolio |
+| Stack | HTML5, CSS3 (custom properties), vanilla JavaScript (IIFE, `defer`) |
+| Build step | None |
+| Deployment | Any static host; configured for GitHub Pages |
+| Repository path | `/KelvinPortfolio/` |
 
 ---
 
-## Features
+## Page structure
 
-- **Responsive layout** across phones, tablets, laptops and large desktops — fluid `clamp()` typography and
-  a breakpoint ladder at 600, 760, 900, 980, 1100 and 420 px.
-- **Mobile navigation drawer** with `aria-expanded` / `aria-controls`, Escape-to-close, click-outside-to-close,
-  focus return to the toggle, and automatic teardown at desktop widths (≥ 900 px).
-- **Sticky header** that condenses on scroll, plus **scroll spy** that marks the current section with
-  `aria-current="location"`.
-- **Smooth scrolling** to anchor targets with a sticky-header offset (disabled when the visitor prefers
-  reduced motion).
-- **Scroll-reveal animations** via `IntersectionObserver`, progressively enhanced — content is fully
-  visible if JavaScript is unavailable or the visitor prefers reduced motion.
-- **Accessible contact form** with inline per-field errors, `aria-invalid`, an `aria-live` status region and
-  a visible spam honeypot.
-- **Config-driven contact details** so no email address, LinkedIn profile or repository URL is hard-coded
-  unless it is real and verified.
-- **Copy-to-clipboard** button for the email address (Clipboard API with a `document.execCommand` fallback).
-- **Keyboard-friendly** throughout: skip link, visible `:focus-visible` outlines, text-only (not colour-only)
-  skill levels.
-- **SVG favicon** and Open Graph / Twitter card metadata.
+The navigation and the page use the same order: **Home → Projects → Skills → About → Contact**.
+
+| # | Section | Anchor | Contents |
+| --- | --- | --- | --- |
+| 1 | Hero | `#home` | Name, headline, short professional intro, portrait photo, "View My Projects" and "Contact Me" buttons, focus strip of core technologies |
+| 2 | Projects | `#projects` | GreenHarvest Avocado Farm System (featured, links to GitHub) and Student Management System (Python, no public link) |
+| 3 | Skills | `#skills` | Python, C, HTML, CSS, JavaScript, database management, networking, computer applications, software engineering fundamentals, problem-solving — grouped in three cards, text only, no ratings or percentages |
+| 4 | About | `#about` | Development-focused introduction, how he approaches problems, commitment to continuous improvement, second photo, quick facts card |
+| 5 | Contact | `#contact` | Email, phone, location, GitHub — each an actionable link — plus an accessible contact form |
+| — | Footer | — | Brand, section links, social links (GitHub), dynamic copyright year, back-to-top control |
 
 ---
 
@@ -78,257 +48,298 @@ Sections in page order:
 
 ```
 KelvinPortfolio/
-├── index.html            # All page markup and content
-├── README.md             # This file
+├── index.html                      # The whole page: head, header, 5 sections, footer
+├── README.md                       # This file
 ├── css/
-│   ├── style.css         # Design tokens, base styles and components (single-column baseline)
-│   └── responsive.css    # Mobile nav drawer, grids and all multi-column breakpoints
+│   ├── style.css                   # Design tokens, layout, components, 3D surfaces (source of truth)
+│   └── responsive.css              # Breakpoints: mobile drawer, touch fallback, reduced motion, print
 ├── js/
-│   └── main.js           # Navigation, scroll spy, reveal, contact form, config
+│   └── main.js                     # One IIFE: nav, scroll-spy, reveal, pointer tilt, email, form, year
 └── images/
-    └── favicon.svg       # "KK" initials favicon (also used as the social preview image)
+    ├── favicon.svg                 # Site icon (SVG, scales cleanly)
+    ├── kelvin-portrait-studio.jpg  # Hero portrait — seated, full body, studio backdrop
+    ├── kelvin-portrait-headshot.jpg # About portrait — head-and-shoulders, outdoor
+    ├── WhatsApp Image 2026-10-22 at 1.21.31 AM.jpeg # Original source photo (untouched)
+    ├── WhatsApp Image 2026-10-22 at 1.22.50 AM.jpeg # Original source photo (untouched)
+    ├── my profile                  # Empty placeholder file (0 bytes)
+    └── my profile 2                # Empty placeholder file (0 bytes)
 ```
 
-`style.css` holds the design system and every component in its mobile-first, single-column form.
-`responsive.css` holds **all** layout changes for wider viewports, including the mobile drawer — so if you
-are hunting for a grid or the burger menu, look there.
+### Notes on the image folder
+
+- The two `kelvin-portrait-*.jpg` files are **URL-safe copies** made from the two original
+  WhatsApp exports. The originals are still present and were not renamed, moved or modified.
+  The copies exist because the original filenames contain spaces and mixed case, which are
+  fragile in URLs and on GitHub Pages.
+- `my profile` and `my profile 2` are **0-byte files** — they contain no image data and are not
+  referenced anywhere. They can be deleted safely with
+  `git rm "images/my profile" "images/my profile 2"` if you want to tidy the repository.
+- No stock photography is used. Both portraits are genuine photographs of Kelvin.
+
+### Where each photo appears
+
+| Photo | Section | Element | Intrinsic size | Crop behaviour |
+| --- | --- | --- | --- | --- |
+| `images/kelvin-portrait-studio.jpg` | Hero (`#home`) | `.portrait-card` → `.portrait-frame` → `.portrait-photo` | `900 × 1125` (4:5) | `object-fit: cover`, `object-position: center 30%` — keeps the subject and the space above his head |
+| `images/kelvin-portrait-headshot.jpg` | About (`#about`) | `.facts-card` → `.about-photo` → `img` | `800 × 800` (1:1) | `aspect-ratio: 1 / 1`, `object-fit: cover`, `object-position: center 35%` |
+
+Both `<img>` elements carry explicit `width`/`height` attributes to reserve layout space and
+prevent cumulative layout shift, plus descriptive `alt` text. The hero image uses
+`loading="eager"` (it is above the fold); the About image uses `loading="lazy"`.
+
+---
+
+## Design system
+
+All design decisions live as CSS custom properties at the top of `css/style.css`.
+
+- **Colour:** deep navy surfaces (`#0a1017`, `#0d1622`, `#111c2c`, `#16233a`) with an emerald
+  accent (`#37d399`) and a blue secondary accent (`#4c9bff`).
+- **Typography:** `Sora` for display/headings, `Inter` for body text, loaded from Google Fonts
+  with `preconnect`. Headings scale fluidly with `clamp()`.
+- **Spacing and shape:** a single radius scale (`8px → 28px`), a `1140px` max content width,
+  consistent gutters, and a fixed `72px` header height.
+- **Motion:** a shared `--transition: 200ms ease` for hover/focus states, plus a subtle
+  `IntersectionObserver`-driven reveal animation. Cards and the hero portrait also carry a
+  CSS 3D layer (perspective tilt, `translateZ()` depth plates, layered shadows) described in
+  [3D effects](#3d-effects). Reveal, float and tilt are all disabled under
+  `prefers-reduced-motion: reduce`.
+
+### Accessibility
+
+- Semantic landmarks: `header`, `nav`, `main`, `section`, `aside`, `footer`.
+- A "skip to content" link is the first focusable element.
+- `aria-label`s on navs, the brand link and the back-to-top button; `aria-labelledby` on sections.
+- Visible focus rings driven by the `--focus` token; nothing relies on colour alone.
+- Form labels are real `<label>` elements; errors use `aria-invalid`, `aria-describedby` and a
+  `role="status"` live region.
+- Decorative SVGs and the project media panels use `aria-hidden="true"` and `focusable="false"`.
+- External links announce that they open in a new tab via screen-reader-only text.
+
+---
+
+## JavaScript configuration (`js/main.js`)
+
+Everything configurable sits in one `CONFIG` object at the top of the file:
+
+```js
+const CONFIG = {
+  CONTACT_EMAIL: 'kelvinkipngetich052@gmail.com',
+  FORM_ENDPOINT: '',
+  GITHUB_PROFILE: 'https://github.com/Kipngetichkelvin',
+  LINKEDIN_PROFILE: ''
+};
+```
+
+| Key | Current value | Effect |
+| --- | --- | --- |
+| `CONTACT_EMAIL` | `kelvinkipngetich052@gmail.com` | Renders the email row as a live `mailto:` link and adds a **Copy email** button with feedback. When set, the address is also filled into the static markup in `index.html`, so it still works with JavaScript disabled. |
+| `FORM_ENDPOINT` | `''` (empty) | While empty, the contact form falls back to composing a `mailto:` message. Set it to a form-service URL (Formspree, Getform, Basin, etc.) to submit over `fetch`/`POST` instead. |
+| `GITHUB_PROFILE` | `https://github.com/Kipngetichkelvin` | Used by the footer/social link renderer. |
+| `LINKEDIN_PROFILE` | `''` (empty) | When empty, no LinkedIn link is rendered. Fill it in to add one. |
+
+Nothing sensitive is stored in the repository. No API keys, tokens or private endpoints are used.
+
+### What `main.js` handles
+
+1. **Mobile navigation** — opens/closes the drawer, manages `aria-expanded`, traps and returns
+   focus, closes on Escape, on link click and on resize past the desktop breakpoint.
+2. **Scroll-spy** — highlights the nav link matching the section currently in view.
+3. **Header state** — adds a condensed/scrolled class to the sticky header.
+4. **Reveal animations** — `IntersectionObserver`; if the observer or JS is unavailable, all
+   `.reveal` elements are shown immediately (no invisible content).
+5. **Email slot** — builds the `mailto:` link and a copy-to-clipboard button, with a
+   `document.execCommand` fallback for older browsers.
+6. **Social links** — renders only the profiles that have a non-empty URL.
+7. **Contact form** — client-side validation, inline errors, a honeypot, and either an endpoint
+   POST or the `mailto:` fallback.
+8. **Pointer tilt** — `requestAnimationFrame`-throttled `pointermove` writes `--rx` / `--ry`
+   (and `--mx` / `--my` for the project sheen) on the six `[data-tilt]` elements, gated behind
+   `(hover: hover) and (pointer: fine)` and skipped when reduced motion is requested.
+9. **Copyright year** — injected so it never goes stale.
+
+---
+
+## Contact form behaviour
+
+The form is honest about what it does. It includes a working `<button>` with no promise of
+server-side delivery unless you configure one.
+
+### Validation rules
+
+| Field | Required | Rule |
+| --- | --- | --- |
+| Name | Yes | Non-empty after trimming |
+| Email | Yes | Matches a standard `local@domain.tld` pattern |
+| Subject | No | Free text; falls back to a default subject |
+| Message | Yes | Non-empty, minimum length |
+| `company-site` | — | Honeypot, visually hidden from users, `tabindex="-1"`, `aria-hidden="true"` |
+
+### Delivery tiers
+
+1. **Endpoint configured** (`FORM_ENDPOINT` set) — the form POSTs as JSON and reports success or
+   failure from the response.
+2. **No endpoint, JavaScript enabled** — the form opens the visitor's mail client with the
+   subject and message pre-filled (`mailto:`). The page says so in the delivery note under the
+   button, so nobody is misled into thinking a message was sent when it was not.
+3. **No endpoint, JavaScript disabled** — the visible email address in the Contact section is a
+   plain `mailto:` link and the phone number is a `tel:` link, so both remain usable.
+
+If the honeypot is filled, the submission is silently discarded.
 
 ---
 
 ## Running the site locally
 
-### Option A — VS Code Live Server (recommended)
+### Option 1 — VS Code Live Server (simplest)
 
-1. Install the **Live Server** extension in VS Code (publisher: Ritwick Dey).
-2. Open the `KelvinPortfolio` folder in VS Code.
-3. Right-click [`index.html`](index.html:1) → **Open with Live Server**.
-4. The browser opens at `http://127.0.0.1:5500/` (port may vary) and reloads on save.
+1. Install the **Live Server** extension.
+2. Right-click `index.html` → **Open with Live Server**.
+3. It opens on something like `http://127.0.0.1:5500/index.html`.
 
-### Option B — Python's built-in server
+### Option 2 — Python built-in server
 
 ```bash
 cd KelvinPortfolio
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/`.
+Then visit <http://localhost:8000/>.
 
-### Option C — open the file directly
+### Option 3 — Node
 
-Double-clicking [`index.html`](index.html:1) works for layout, styling and most scripts. Google Fonts load
-over the network, and clipboard access may be restricted on `file://`, so a local server is preferable.
-
----
-
-## Configuration
-
-All runtime configuration lives in one place: the `CONFIG` object at the top of [`js/main.js`](js/main.js:38).
-
-```js
-const CONFIG = {
-  CONTACT_EMAIL: '',                                        // js/main.js:39
-  FORM_ENDPOINT: '',                                        // js/main.js:40
-  GITHUB_PROFILE: 'https://github.com/Kipngetichkelvin',    // js/main.js:41
-  LINKEDIN_PROFILE: ''                                      // js/main.js:42
-};
+```bash
+npx serve .
 ```
 
-### `CONTACT_EMAIL` — your real email address
+### Option 4 — Double-clicking `index.html`
 
-Leave it as `''` until you are ready to publish an address. When empty, the Contact section shows a
-"not configured yet — see README.md" hint instead of inventing one, and the form cannot fall back to
-`mailto:`.
-
-When you set it, two things change:
-
-- the address is displayed in the Contact list with a **copy** button, and
-- it becomes the recipient of the `mailto:` fallback described below.
-
-### `FORM_ENDPOINT` — a form-delivery service URL
-
-The site has no backend. To receive submissions without an email client, create a free form endpoint (for
-example [Formspree](https://formspree.io/) or a similar service) and paste the endpoint URL here:
-
-```js
-FORM_ENDPOINT: 'https://formspree.io/f/xxxxxxxx'
-```
-
-When this is set, the form `POST`s the submission with `fetch()` and shows a success or error message.
-Leave it empty to use the `mailto:` fallback instead.
-
-> Never place API keys, passwords or other secrets in this file. Anything in a static site is public.
-> A form endpoint URL is designed to be public; a private API key is not.
-
-### `GITHUB_PROFILE` / `LINKEDIN_PROFILE`
-
-`GITHUB_PROFILE` is set and appears in the Contact section and the footer. `LINKEDIN_PROFILE` is empty —
-only add it once the profile genuinely exists and you want it visible. When it is set, the footer gains an
-extra social link automatically; when it is empty, nothing is shown.
+The page will render, because all asset paths are relative. A local server is still preferred:
+one or two browser security rules around clipboard access behave differently on `file://`.
 
 ---
 
-## How the contact form behaves
+## Deploying to GitHub Pages
 
-The form in [`index.html`](index.html:598) is validated client-side by [`initContactForm()`](js/main.js:395):
+The site is already compatible: relative paths, `index.html` at the repository root, no server
+code, no environment variables.
 
-| Field | Rule |
-| --- | --- |
-| Full name | Required, at least 2 characters |
-| Email | Required, must match a standard address pattern |
-| Subject | Optional |
-| Message | Required, at least 15 characters |
+1. Commit and push the files to the `main` branch of the `KelvinPortfolio` repository.
+2. In GitHub, open **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to *Deploy from a branch*.
+4. Choose branch **main** and folder **/ (root)**, then **Save**.
+5. Wait for the Pages build to finish (usually under a minute).
+6. Visit <https://kipngetichkelvin.github.io/KelvinPortfolio/>.
 
-Delivery then follows three tiers, in order:
-
-1. **`FORM_ENDPOINT` set** → submission is `POST`ed to the endpoint with `fetch()`. The button is disabled
-   while pending and the result is announced in the live status region.
-2. **`FORM_ENDPOINT` empty, `CONTACT_EMAIL` set** → the form builds a `mailto:` link and opens the visitor's
-   email client with the message pre-filled.
-3. **Both empty** → an honest informational message explains that message delivery has not been configured
-   yet and points the visitor to GitHub.
-
-The honeypot field (`#company-site`, hidden from view and from screen readers, `tabindex="-1"`) silently
-short-circuits bots. **The form never claims to have sent an email when it has not.**
-
----
-
-## Replacing placeholder media
-
-The site intentionally ships **no stock photography and no fake portrait**. Everything visual is either CSS
-or text, and every placeholder is labelled so it is obvious what to replace.
-
-| Placeholder | Where | How to replace |
-| --- | --- | --- |
-| `KK` initials avatar | `.avatar-card` in [`index.html`](index.html:100) | Add a real photo to `images/`, then swap the avatar block for an `<img>` with meaningful `alt` text |
-| `{ }`, `DB`, `↑` skill icons | [`index.html`](index.html:226) and the sibling cards | Replace the text glyph with an inline SVG icon, or keep them as-is |
-| `@`, `GH`, `◎` contact icons | [`index.html`](index.html:557) and siblings | Same as above |
-| `.project-media` blocks | [`index.html`](index.html:296) and [`index.html`](index.html:353) | Add screenshots to `images/` and swap the decorative block for an `<img>`; remember to update the `aria-label` wording to describe the real screenshot |
-
-The `.project-media` elements currently use `role="img"` with a descriptive `aria-label` so screen readers
-receive a sensible description of a decorative graphic. If you insert a real screenshot, use a real `<img>`
-with an `alt` attribute instead.
-
----
-
-## Adding a third project
-
-A commented-out template card is ready to use at [`index.html`](index.html:415). Duplicate that block,
-fill in the real details, and uncomment it. Keep the same class names so styling applies:
-
-```
-project-card → project-media → project-body
-  → badge-row, project-title, project-summary, project-features
-  → tag-row, project-actions
-```
-
-Rules to keep the page honest:
-
-- Describe only features that exist in the code.
-- Link a repository **only** when the URL is verified.
-- If something is planned rather than built, say so in a `.project-note`, as the two existing cards do.
-
-The **Python Student Management System** card currently has no repository link, because no verified URL was
-available when the site was built. Once you have published the repository, replace the
-`.project-link-note` paragraph in that card with the button in the commented block directly below it.
-
----
-
-## Honesty notes / current limitations
-
-This site was built to represent Kelvin's background accurately. Please keep it that way when editing.
-
-- **No employment history, certifications, awards or achievements** are claimed anywhere on the page — only
-  education, skills and academic/personal projects that were described.
-- **No expert-level claims.** Skills are grouped plainly; the "growing" card is explicitly marked as
-  in-progress rather than presented as mastery.
-- **GreenHarvest Avocado Farm System** is described from its documented scope, and the card carries an
-  implementation-status note because the repository could not be inspected while the site was built. Verify
-  the feature list against the real code and prune anything not implemented (payments, third-party APIs,
-  authentication, database persistence) before publishing.
-- **Python Student Management System** is described in terms of its intended core operations
-  (add, view, search, update, delete) without a repository link.
-- **No real portrait photo** is used; the initials avatar is a deliberate placeholder.
-- **No email address or LinkedIn profile is invented.** Both are empty in `CONFIG` until you supply real ones.
-- **No backend, no analytics, no cookies, no tracking.**
-- **Nothing is pushed to GitHub by this project.** Deployment is a manual step you perform.
-
----
-
-## Deployment (GitHub Pages)
-
-The site is fully static and uses only relative asset paths (`css/style.css`, `css/responsive.css`,
-`js/main.js`, `images/favicon.svg`), so it works from a project subpath as well as a domain root. There are
-no `localhost` URLs in the shipped files.
-
-1. Create a **new, separate** repository for the portfolio, e.g. `KelvinPortfolio`.
-2. Confirm the owner name in `GITHUB_PROFILE` matches the account you will publish from.
-3. Commit and push the files.
-4. In the repository, open **Settings → Pages**.
-5. Under **Build and deployment**, set **Source** to *Deploy from a branch*.
-6. Choose the branch (`main`) and the folder (`/ (root)`), then save.
-7. GitHub publishes at `https://<username>.github.io/KelvinPortfolio/` after a minute or two.
+Absolute URLs inside the `<head>` (`og:url`, `og:image`, `twitter:image`, `canonical`) already
+point at that Pages address. If you deploy to a **different** domain, update those four tags in
+`index.html` — everything else uses relative paths and needs no change.
 
 ### Publishing checklist
 
-- [ ] `CONTACT_EMAIL` set to a real address (or left empty deliberately)
-- [ ] `FORM_ENDPOINT` set if you want submissions delivered without an email client
-- [ ] `LINKEDIN_PROFILE` set only if the profile exists
-- [ ] Project links verified and opening in a new tab
-- [ ] Project notes match the actual state of each repository
-- [ ] Placeholder screenshots replaced, or left as labelled placeholders
-- [ ] Tested on a phone-width viewport after deploying
-
-> Nothing has been published, pushed or deleted. Deployment is yours to run when you are ready.
-
----
-
-## Testing summary
-
-### Verified working
-
-- All asset references resolve: [`css/style.css`](css/style.css:1), [`css/responsive.css`](css/responsive.css:1),
-  [`js/main.js`](js/main.js:1) (loaded with `defer`) and [`images/favicon.svg`](images/favicon.svg:1).
-- All six nav links and the footer quick links point at IDs that exist: `#home`, `#about`, `#skills`,
-  `#projects`, `#education`, `#contact`.
-- The mobile drawer, scroll spy, reveal animations, back-to-top button, copy-to-clipboard and current-year
-  footer all have matching CSS and JS hooks.
-- The contact form's field IDs, error regions and `aria-describedby` references line up with the JavaScript
-  field map.
-- Malformed tags that had slipped into the markup were corrected; the document contains no stray `</>`
-  sequences.
-
-### Requires your configuration
-
-- Email address display and `mailto:` delivery — needs `CONTACT_EMAIL`.
-- Real form delivery — needs `FORM_ENDPOINT` or a working mail client.
-- LinkedIn social link — needs `LINKEDIN_PROFILE`.
-- Python project repository button — needs a verified repository URL.
-- Real portrait and screenshots — see [Replacing placeholder media](#replacing-placeholder-media).
-
-### Could not be tested here
-
-- **Visual rendering in a real browser** — this environment has no browser, so layout, fonts and animation
-  timing were verified by reading the CSS, not by looking at the page. Please open the site once in Chrome,
-  Firefox and a phone viewport before publishing.
-- **Cross-device breakpoint behaviour** at exactly 600/760/900/980/1100 px.
-- **Live form submission** to a real endpoint (no endpoint existed to test against).
-- **Clipboard behaviour** on `file://` and on older browsers.
-- **The two project repositories' contents** — see the honesty notes above.
-
-### Suggested manual pass
-
-1. Run Live Server and check the console for errors.
-2. Narrow the window from desktop to 360 px; confirm the burger menu opens, closes on Escape and on
-   link click.
-3. Tab through the page; confirm a visible focus ring on every link, button and form field.
-4. Submit the empty form; confirm three inline errors and the message-field error all appear.
-5. Fill in valid details; confirm the status message matches your configuration tier.
-6. Enable "reduce motion" in your OS and reload; confirm content is visible without animation.
+- [ ] Both portraits load and are cropped sensibly.
+- [ ] Nav links scroll to the right sections, in the order Home, Projects, Skills, About, Contact.
+- [ ] The GreenHarvest button opens the correct repository in a new tab.
+- [ ] Email and phone links open the mail client and dialler.
+- [ ] The contact form either posts to your endpoint or opens a pre-filled email.
+- [ ] Layout holds at ~360px, 768px, 1024px and 1440px wide with no horizontal scrolling.
+- [ ] The page is usable with JavaScript disabled (links still work, content still visible).
+- [ ] Copyright year in the footer shows the current year.
 
 ---
 
-## Licence and content
+## Verification and testing
 
-All written content describes Kelvin Kipngetich Kiplangat's own background. The code is his to reuse and
-modify. If you fork the design for someone else, replace every piece of personal content — including the
-`CONFIG` values, the initials avatar, the meta description and the structured facts in the About section.
+### Verified in this pass
+
+- **Banned-content sweep** — `index.html`, `README.md`, `js/main.js`, `css/style.css` and
+  `css/responsive.css` were searched for student, university, degree, graduation, attachment,
+  internship and job-shadowing wording. No such references remain. The only match is the
+  project title **"Student Management System"**, which is the actual name of Kelvin's Python
+  project and is intentionally kept.
+- **Asset paths** — every `src`/`href` that points at a local file resolves to a file that
+  exists in the workspace: `css/style.css`, `css/responsive.css`, `js/main.js`,
+  `images/favicon.svg`, `images/kelvin-portrait-studio.jpg`, `images/kelvin-portrait-headshot.jpg`.
+- **Contact values** — email, phone, GitHub URL and repository URL were checked against the
+  brief character by character.
+- **Markup hygiene** — one `<h1>`, ordered heading levels below it, no duplicate `id`s, all form
+  controls labelled, no inline event handlers, no `style` attributes.
+- **CSS hygiene** — 14 sequential section banners in `style.css`; every selector in
+  `responsive.css` matched to markup that still exists (dead navigation, timeline and
+  opportunity rules were removed). All 109 classes used in `index.html` have a matching rule.
+- **3D wiring** — `data-tilt` appears on exactly 6 elements (hero portrait, 2 project cards,
+  3 skills cards); `initTilt()` is called from `boot()`; the `(hover: none)` and
+  `prefers-reduced-motion` blocks were re-read to confirm the reduced-motion block comes last.
+- **No console noise** — no missing files, no failing requests, no JavaScript errors were
+  observed in static review; the only `console.warn` left sits behind a condition that can no
+  longer be true now that `CONTACT_EMAIL` is set.
+
+### What could not be tested here
+
+This work was done without a browser session, so the following are reasoned from the code
+rather than observed:
+
+- Real rendering at each breakpoint (desktop, laptop, tablet, mobile) — the media queries were
+  reviewed by hand.
+- Real hover/tilt rendering in a browser. The 3D layer was verified by reading the CSS and JS,
+  not by observing the animation; the exact feel of `MAX_TILT = 4.5deg` is untuned.
+- The `@media (hover: none)` resting pose on an actual touch device.
+- Whether `.portrait-card::before`, which extends slightly beyond the card, is visually clipped
+  by the hero's `overflow: hidden` on very narrow screens.
+- Clipboard copy behaviour on Safari/iOS and on `file://`.
+- Real submission of the form to a third-party endpoint (none is configured).
+- Screen-reader output on VoiceOver, NVDA and TalkBack.
+- Colour-contrast ratios measured with a tool (the token values were chosen to exceed WCAG AA
+  for body text on the dark surfaces).
+
+A short manual pass in a browser, following the publishing checklist above, closes those gaps.
+
+---
+
+## Customising
+
+- **Text and sections** — edit `index.html`. Section content is self-contained per `<section>`.
+- **Colours, type, spacing** — edit the custom properties at the top of `css/style.css`; almost
+  everything inherits from them.
+- **Breakpoints** — edit `css/responsive.css`. It is organised from small screens upward.
+- **Contact details** — update `CONFIG` in `js/main.js`. If you change the email, also update
+  the static `mailto:` link in the Contact section of `index.html` so it stays correct when
+  JavaScript is off.
+- **Adding a project** — copy an existing `<article class="project-card reveal" data-tilt>`
+  block inside `.project-grid` in `index.html`, then replace the badges, title, summaries,
+  feature list, status note and tags. Keep `data-tilt` on the card, and keep
+  `target="_blank" rel="noopener noreferrer"` on any external link.
+- **Tuning the 3D** — change `MAX_TILT` in `initTilt()` (`js/main.js`) for stronger or weaker
+  pointer tilt, and the `perspective` values in `css/style.css` (`1100px` hero, `1500px`
+  projects, `1400px` skills) for more or less depth. Reducing `perspective` exaggerates the effect.
+- **Replacing a portrait** — drop the new file into `images/`, point the `src` at it, update the
+  `width`/`height` attributes to the real pixel dimensions and rewrite the `alt` text. Keep the
+  filename lowercase with hyphens and no spaces.
+
+---
+
+## Commit and push
+
+```bash
+cd KelvinPortfolio
+git status
+git add index.html README.md css/style.css css/responsive.css js/main.js images/kelvin-portrait-studio.jpg images/kelvin-portrait-headshot.jpg
+git commit -m "Add CSS 3D layer: floating hero portrait, tilting project and skills cards, touch and reduced-motion fallbacks"
+git push origin main
+```
+
+If you also want to remove the two empty placeholder files from the repository:
+
+```bash
+git rm "images/my profile" "images/my profile 2"
+git commit -m "Remove empty placeholder files from images"
+git push origin main
+```
+
+---
+
+## Licence
+
+The website code (HTML, CSS, JavaScript) is free to reuse. The photographs in `images/` are
+personal images of Kelvin Kipngetich Kiplangat and are **not** covered by that permission —
+please do not redistribute them.

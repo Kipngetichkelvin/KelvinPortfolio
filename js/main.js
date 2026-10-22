@@ -13,7 +13,8 @@
      6. Contact details (email slot, copy button, optional LinkedIn)
      7. Contact form validation and delivery
      8. Footer year
-     9. Boot
+     9. Pointer tilt (CSS 3D)
+    10. Boot
    ========================================================================== */
 
 (function () {
@@ -36,7 +37,7 @@
      ========================================================================== */
 
   const CONFIG = {
-    CONTACT_EMAIL: '',
+    CONTACT_EMAIL: 'kelvinkipngetich052@gmail.com',
     FORM_ENDPOINT: '',
     GITHUB_PROFILE: 'https://github.com/Kipngetichkelvin',
     LINKEDIN_PROFILE: ''
@@ -266,6 +267,67 @@
 
     revealTargets.forEach(function (element) {
       observer.observe(element);
+    });
+  }
+
+  /* ==========================================================================
+     9. POINTER TILT (CSS 3D)
+     ========================================================================== */
+
+  // Only devices with a real hovering pointer get the tilt. Touch screens keep the
+  // resting pose, so nothing depends on mouse movement to be readable.
+  const tiltQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  function initTilt() {
+    if (!tiltQuery.matches || prefersReducedMotion()) return;
+
+    const targets = Array.prototype.slice.call(document.querySelectorAll('[data-tilt]'));
+    if (!targets.length) return;
+
+    const MAX_TILT = 4.5;
+
+    targets.forEach(function (target) {
+      let frame = 0;
+      let pending = null;
+
+      function reset() {
+        frame = 0;
+        pending = null;
+        target.classList.remove('is-tilting');
+        target.style.setProperty('--rx', '0deg');
+        target.style.setProperty('--ry', '0deg');
+      }
+
+      // One write per animation frame keeps the pointer handler cheap.
+      function apply() {
+        frame = 0;
+        if (!pending) return;
+
+        const rect = target.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+
+        const px = (pending.clientX - rect.left) / rect.width;
+        const py = (pending.clientY - rect.top) / rect.height;
+
+        target.style.setProperty('--rx', (-(py - 0.5) * 2 * MAX_TILT).toFixed(2) + 'deg');
+        target.style.setProperty('--ry', ((px - 0.5) * 2 * MAX_TILT).toFixed(2) + 'deg');
+        // Also drives the project-card sheen highlight.
+        target.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        target.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      }
+
+      target.addEventListener('pointerenter', function () {
+        target.classList.add('is-tilting');
+      });
+
+      target.addEventListener('pointermove', function (event) {
+        pending = event;
+        if (!frame) frame = window.requestAnimationFrame(apply);
+      });
+
+      ['pointerleave', 'pointercancel', 'blur'].forEach(function (type) {
+        target.addEventListener(type, reset, type === 'blur');
+      });
     });
   }
 
@@ -644,7 +706,7 @@
   }
 
   /* ==========================================================================
-     9. BOOT
+     10. BOOT
      ========================================================================== */
 
   function boot() {
@@ -652,6 +714,7 @@
     renderEmailSlot();
     renderSocialLinks();
     initReveal();
+    initTilt();
     initContactForm();
     updateHeaderState();
     updateScrollSpy();

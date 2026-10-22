@@ -110,10 +110,6 @@
     padding-block: 4.5rem;
   }
 
-  .hero-meta {
-    gap: 1.15rem 1.75rem;
-  }
-
   .focus-strip {
     justify-content: center;
   }
@@ -136,23 +132,12 @@
     gap: 2.5rem;
   }
 
-  /* Two skill cards per row; the growth card spans the full width so it
-     does not sit alone in an awkward half row. */
   .skill-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .skill-card--growth {
-    grid-column: 1 / -1;
-  }
-
   .project-grid {
     gap: 1.75rem;
-  }
-
-  .opportunity-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
   }
 
   .footer-grid {
@@ -163,18 +148,6 @@
 
   .footer-bottom {
     margin-top: 2.5rem;
-  }
-
-  .timeline {
-    padding-left: 2.25rem;
-  }
-
-  .timeline-dot {
-    left: -2.25rem;
-  }
-
-  .timeline-card {
-    padding: 1.85rem;
   }
 }
 
@@ -240,6 +213,10 @@
     justify-content: flex-end;
   }
 
+  .portrait-card {
+    width: min(100%, 350px);
+  }
+
   .about-grid {
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
     gap: 3rem;
@@ -283,13 +260,6 @@
     gap: 2rem;
   }
 
-  .opportunity-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .timeline-card {
-    padding: 2rem;
-  }
 }
 
 /* ==========================================================================
@@ -297,10 +267,6 @@
    ========================================================================== */
 
 @media (max-width: 420px) {
-  .hero-meta {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .hero-actions {
     gap: 0.65rem;
   }
@@ -310,22 +276,17 @@
     justify-content: center;
   }
 
-  .avatar {
-    width: 124px;
-    height: 124px;
-    font-size: 2rem;
+  .portrait-card {
+    width: min(100%, 300px);
+    padding: 0.55rem 0.55rem 0.95rem;
+  }
+
+  .portrait-caption strong {
+    font-size: 0.88rem;
   }
 
   .contact-form-wrap {
     padding: 1.35rem 1.1rem;
-  }
-
-  .timeline {
-    padding-left: 1.35rem;
-  }
-
-  .timeline-dot {
-    left: -1.35rem;
   }
 
   .badge-row,
@@ -336,17 +297,53 @@
 }
 
 /* ==========================================================================
-   8. Reduced motion
+   8. Touch devices (no hover) — cards keep a static raised pose
+   --------------------------------------------------------------------------
+   Phones emulate :hover after a tap, which can leave a card stuck in its
+   lifted state, and no touch screen can follow a pointer. These rules give the
+   same sense of depth without interaction: a fixed raise, a stronger border
+   and a resting sheen. js/main.js already skips the pointer tilt here because
+   initTilt() bails unless "(hover: hover) and (pointer: fine)" matches.
+   ========================================================================== */
+
+@media (hover: none) {
+  .project-card,
+  .skill-card {
+    --lift: -3px;
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow);
+  }
+
+  .project-card::after {
+    opacity: 0.5;
+  }
+
+  .skill-card .skill-icon {
+    transform: translateZ(30px);
+  }
+}
+
+/* ==========================================================================
+   9. Reduced motion
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .primary-nav.is-open {
     transition: none;
   }
+
+  /* Depth layers stay in place but must not move. Declared after the
+     (hover: none) block so it wins on touch devices that also reduce motion. */
+  .skill-card .skill-icon,
+  .skill-card:hover .skill-icon,
+  .skill-card:focus-within .skill-icon {
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ==========================================================================
-   9. Print
+   10. Print
    ========================================================================== */
 
 @media print {
@@ -374,8 +371,6 @@
 
   .project-card,
   .skill-card,
-  .timeline-card,
-  .opportunity-card,
   .facts-card,
   .contact-info {
     border: 1px solid #ccc;
@@ -389,14 +384,11 @@
   .contact-grid,
   .skill-grid,
   .project-grid,
-  .opportunity-grid,
   .footer-grid {
     display: block;
   }
 
-  .project-card + .project-card,
-  .opportunity-card + .opportunity-card,
-  .timeline-item + .timeline-item {
+  .project-card + .project-card {
     margin-top: 1rem;
   }
 
